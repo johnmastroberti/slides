@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Xe Doping Status</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/blood.css" id="theme">
+    <style type="text/css">
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            word-wrap: normal;
+            -webkit-hyphens: manual;
+            -moz-hyphens: manual;
+            hyphens: manual;
+        }
+    </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h2>Xe Doping Status</h2>
+					<p>John Mastroberti</p>
+					<p>February 7, 2022</p>
+				</section>
+
+				<section>
+					<h4>Recap: Why Pursue Xe Doping?</h4>
+          <ul>
+            <li>LAr scintillation light is 128 nm, which most PMTs cannot detect</li>
+            <li>Some form of wavelength shifting is required (CENNS-10 uses TPB coating)</li>
+            <ul>
+              <li>TPB absorbes 128 nm light and re-emits in visible range (~450 nm)</li>
+            </ul>
+            <li>Xe absorbs 128 nm light and re-emits at 174 nm, 
+              so it can supplement/potentially replace TPB for COH-Ar-750</li>
+          </ul>
+				</section>
+
+				<section>
+          <h4>Optical Properties in <code>cenns10geant4</code></h4>
+
+          <img src="SimParameterTable.png" style="width: 600px"></img>
+				</section>
+
+				<section>
+          <h4>Optical Properties in <code>cenns10geant4</code></h4>
+
+          <div style="display: flex; align-items: center;">
+            <img src="SimParameterTableHighlights.png" style="width: 600px; flex-basis: 60%"></img>
+            <p style="color: yellow; padding: 20px; font-size: 28px">These properties need to account for mutliple scintillation wavelengths</p>
+          </div>
+				</section>
+
+
+			</div>
+		</div>
+
+		<script src="../node_modules/reveal.js/dist/reveal.js"></script>
+		<script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+		</script>
+
+	</body>
+</html>
