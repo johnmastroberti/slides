@@ -22,6 +22,11 @@
             -moz-hyphens: manual;
             hyphens: manual;
         }
+
+        p, li {
+          font-size: 30px;
+        }
+
     </style>
 	</head>
 
@@ -65,6 +70,114 @@
           </div>
 				</section>
 
+				<section>
+          <h4>Scintillation Spectrum</h4>
+
+          <ul>
+            <li>
+              Simple implementation: 10% of photons are emitted at 
+              128 nm and 90% are are emitted at 174 nm
+            </li>
+            <li>
+              This involves changing the <code>FASTCOMPONENT</code> and
+              <code>SLOWCOMPONENT</code> arrays for the liquid argon.
+            </li>
+            <li>
+              This could be more sophisticated in the future
+            </li>
+          </ul>
+
+          <div style="display: flex; align-items: center;">
+            <img src="ArXeSpectrum.png" style="width: 500px; flex-basis: 40%;"/>
+            <p style="font-size: 20px; padding: 20px">Reference: Neumeier et al, <a href="https://arxiv.org/abs/1511.07723">arXiv:1511.07723</a></p>
+          </div>
+				</section>
+
+				<section>
+          <h4>TPB Efficiency</h4>
+
+
+          <div style="display: flex; align-items: center;">
+            <img src="TPBEff.png" style="width: 400px; flex-basis: 80%"/>
+            <p style="font-size: 20px; padding: 20px">
+            Reference: Benson, Gann, and Gehman, <a href="https://link.springer.com/article/10.1140/epjc/s10052-018-5807-z">Eur. Phys. J. C (2018) 78:329</a></p>
+          </div>
+
+          <ul>
+            <li>
+              According to this reference, the TPB conversion efficiency
+              should be about the same for 128 nm and 174 nm light
+            </li>
+            <li>
+              To first order we can leave this alone, although the intermediate
+              wavelengths would need to be dealt with if more than 2 wavelength
+              bins are used
+            </li>
+          </ul>
+				</section>
+
+
+				<section>
+          <h4>LAr Rayleigh Scattering and Index of Refraction</h4>
+
+
+          <ul>
+            <li>
+              These are already handled across the wavelength range 120 nm to 620 nm
+            </li>
+            <li>
+              Values are taken from Grace et al,
+              <a href="https://arxiv.org/abs/1502.04213v4">arxiv:1502.04213v4</a> (shown below)
+            </li>
+          </ul>
+
+          <div style="display: flex; align-items: center;">
+            <img src="Refraction.png" style="height: 250px; flex-basis: 50%"/>
+            <img src="Rayleigh.png" style="height: 250px; padding: 20px"/>
+          </div>
+				</section>
+
+
+				<section>
+          <h4>LAr Absorption/Attenuation Length</h4>
+
+          <ul>
+            <li>
+              This is the last property to tweak, currently set at 20 m for all
+              wavelengths
+            </li>
+            <li>
+              Still chasing references on this, but I would be surprised if the
+              value for 174 nm light is significantly different
+            </li>
+            <li>
+              Given the size of CENNS-10 I don't expect attenuation to be impactful
+              given the attenuation length is so large
+            </li>
+          </ul>
+				</section>
+
+
+				<section>
+          <h4>TO-DO</h4>
+
+          <ul>
+            <li>
+              Record Xe clip for site visit video
+            </li>
+            <li>
+              Continue chasing LAr attenuation length references
+            </li>
+            <li>
+              Consider wavelength dependence of other properties such as
+              reflection probabilities, TPB absorption length
+            </li>
+            <li>
+              Run simulations to compare Xe doping vs no doping; at this point
+              I don't expect to see any difference in light yield
+            </li>
+          </ul>
+				</section>
 
 			</div>
 		</div>
