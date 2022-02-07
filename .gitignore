@@ -1,0 +1,16 @@
+*.aux
+*.log
+__pycache__
+.auctex-auto
+*.zip
+.~lock*
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+a.out
+test
+CMakeFiles
+CMakeCache.txt
+compile_commands.json
+*.tar.gz
+node_modules
