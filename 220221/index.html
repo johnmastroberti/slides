@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Xe Doping Status</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../node_modules/reveal.js/dist/theme/blood.css" id="theme">
+    <style type="text/css">
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4,
+        .reveal h5,
+        .reveal h6 {
+            word-wrap: normal;
+            -webkit-hyphens: manual;
+            -moz-hyphens: manual;
+            hyphens: manual;
+        }
+
+        p, li {
+          font-size: 30px;
+        }
+
+    </style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+
+				<section>
+					<h2>Xe Doping Status</h2>
+					<p>John Mastroberti</p>
+					<p>February 21, 2022</p>
+				</section>
+
+				<section>
+					<h4>References</h4>
+          <ul>
+            <li>These slides are based on results from</li>
+            <ol>
+              <li><a href="https://arxiv.org/abs/2006.09780">McFadden et al, 
+                  <i>Large-Scale, Precision Xenon Doping of Liquid Argon</i>, 2020</a></li>
+              <li><a href="https://arxiv.org/abs/2112.07427">Vogl et al,
+                  <i>Scintillation and optical properties of xenon-doped liquid argon, 2021</i></a></li>
+              <li><a href="https://inspirehep.net/literature/1737812">Akimov et al,
+                  <i>Fast component re-emission in Xe-doped liquid argon</i>, 2019</a></li>
+            </ol>
+          </ul>
+				</section>
+
+				<section>
+					<h4>Changes to Detector Parameters due to Xe Doping</h4>
+          <ul>
+            <li>As showed last time, many of the detector/simulation parameters remain unchanged</li>
+            <li>Based on these references, the main parameters that need adjustment are</li>
+            <ul>
+              <li>Scintillation wavelength (discussed last time)</li>
+              <li>Scintillation time structure</li>
+              <li>Attenuation length</li>
+            </ul>
+          </ul>
+				</section>
+
+				<section>
+          <h4>Time Structure</h4>
+          <ul>
+            <li>Currently, scintillation light output is described by
+            \[ I(t) = I_f e^{-t/\tau_f} + I_s e^{-t/\tau_s} \]
+            </li>
+            <li>According to references, this should at least be adjusted to
+            \[ I(t) = I_f e^{-t/\tau_f} + I_s e^{-t/\tau_s} - I_d e^{-t/\tau_d} \]
+            where $\tau_d$ describes the time for energy to transfer between Ar and Xe excimers
+            </li>
+          </ul>
+				</section>
+
+				<section>
+          <h4>Time Constant Values</h4>
+          <ul>
+            <li>$\tau_f = 6$ ns is not influenced by Xe doping</li>
+            <li>$\tau_s = 1300$ ns for undoped LAr, $\mathcal{O}(100 \mbox{ ns})$ for Xe doped LAr</li>
+            <li>$\tau_d = \mathcal{O}(100 \mbox{ ns})$ for Xe doped LAr, not applicable for undoped LAr</li>
+          </ul>
+				</section>
+
+        <section>
+          <h4>Attenuation Length</h4>
+          <ul>
+            <li>This is currently set to 20 m for all wavelengths in <code>cenns10geant4</code></li>
+            <li>Reference 2 measures 42 cm for undoped LAr, increasing to 650 cm at 300 ppm Xe concentration</li>
+            <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0168900296007401">
+                Another reference from 1997</a> quotes 66 cm for undoped LAr and around 150 cm for 3% Xe concentration 
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>TO-DO</h4>
+          <ul>
+            <li>Create GDML files specifying one or more Xe concentrations</li>
+            <li>Implement handling of the $\tau_d$ time constant</li>
+            <li>Think about adjusting F90 parameter to look at a smaller time window</li>
+            <li>Think about shortening pulse lengths</li>
+            <li>Run simulations with Xe doping vs no Xe doping</li>
+          </ul>
+        </section>
+
+			</div>
+		</div>
+
+    <!--Reveal scripts {{{-->
+		<script src="../node_modules/reveal.js/dist/reveal.js"></script>
+		<script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+		<script>
+			Reveal.initialize({
+				history: true,
+				transition: 'linear',
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+				plugins: [ RevealMath.MathJax2 ]
+			});
+		</script>
+    <!--Reveal scripts }}}-->
+
+	</body>
+</html>
