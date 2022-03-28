@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Xe Doping Status</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/blood.css"
+      id="theme"
+    />
+    <style type="text/css">
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 {
+        word-wrap: normal;
+        -webkit-hyphens: manual;
+        -moz-hyphens: manual;
+        hyphens: manual;
+      }
+
+      p,
+      li {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Xe Doping Status</h2>
+          <p>John Mastroberti</p>
+          <p>March 28, 2022</p>
+        </section>
+
+        <section>
+          <h4>Reminder: Results from last time</h4>
+          <ul>
+            <li>
+              Decreasing LAr absorption length from 20m to 66cm significantly
+              impacted light yield
+            </li>
+            <li>
+              XeDLAr (with 150cm absorption length) showed much higher light
+              yield than undoped LAr
+            </li>
+            <li>F90 significantly increased with Xe doping</li>
+            <li>Strange two-peak structure showing up in Kr83 F90 plot</li>
+            <li>PMT top fraction also significantly influenced by Xe doping</li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>Plots from last time</h2>
+          </section>
+
+          <section><img src="./old_plots/Co57pe.png" alt="" /></section>
+          <section><img src="./old_plots/Co57f90.png" alt="" /></section>
+          <section><img src="./old_plots/Co57top_frac.png" alt="" /></section>
+          <section><img src="./old_plots/Kr83pe.png" alt="" /></section>
+          <section><img src="./old_plots/Kr83f90.png" alt="" /></section>
+          <section><img src="./old_plots/Kr83top_frac.png" alt="" /></section>
+        </section>
+
+        <section>
+          <h4>Adjusting the treatment of Absorption Length</h4>
+          <ul>
+            <li>
+              Previously, the absorption length was set to a constant value for
+              all wavelengths
+            </li>
+            <li>
+              No luck finding a source for absorption length vs wavelength yet
+            </li>
+            <li>
+              I tried setting $\lambda_{abs}$ to 66cm, 150cm for scintillation
+              wavelengths, with 20m used for wavelengths above 180nm (visible
+              light)
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>New Results</h2>
+          </section>
+
+          <section><img src="./new_plots/comp/Co57pe.png" alt="" /></section>
+          <section><img src="./new_plots/comp/Kr83pe.png" alt="" /></section>
+          <section>
+            <img src="./new_plots/comp/Co57top_frac.png" alt="" />
+          </section>
+          <section>
+            <img src="./new_plots/comp/Kr83top_frac.png" alt="" />
+          </section>
+        </section>
+
+        <section>
+          <h4>Investigating F90 dual peaks</h4>
+          <img src="./new_plots/XeCo57-fTrueF90.png" alt="" />
+          <p>F90 for Co57 definitely has only one peak</p>
+        </section>
+
+        <section>
+          <h4>TO-DO</h4>
+          <ul>
+            <li>Top PMT vs bottom PMT 2D histogram</li>
+            <li>Look at a smaller F parameter (e.g. F40)</li>
+            <li>
+              Consider correlation between scintillation time and wavelength
+            </li>
+            <li>Look for more literature values for absorption lengths</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <!--Reveal scripts {{{-->
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        history: true,
+        transition: "linear",
+
+        mathjax2: {
+          config: "TeX-AMS_HTML-full",
+          TeX: {
+            Macros: {
+              R: "\\mathbb{R}",
+              set: ["\\left\\{#1 \\; ; \\; #2\\right\\}", 2],
+            },
+          },
+        },
+
+        // There are three typesetters available
+        // RevealMath.MathJax2 (default)
+        // RevealMath.MathJax3
+        // RevealMath.KaTeX
+        //
+        // More info at https://revealjs.com/math/
+        plugins: [RevealMath.MathJax2],
+      });
+    </script>
+    <!--Reveal scripts }}}-->
+  </body>
+</html>

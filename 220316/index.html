@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Xe Doping Status</title>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" href="../node_modules/reveal.js/dist/reveal.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/reveal.js/dist/theme/blood.css"
+      id="theme"
+    />
+    <style type="text/css">
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 {
+        word-wrap: normal;
+        -webkit-hyphens: manual;
+        -moz-hyphens: manual;
+        hyphens: manual;
+      }
+
+      p,
+      li {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Xe Doping Status</h2>
+          <p>John Mastroberti</p>
+          <p>March 16, 2022</p>
+        </section>
+
+        <section>
+          <h4>Reminder: Key Effects of Xe Doping</h4>
+          <ul>
+            <li>Scintillation wavelength: 128 nm $\rightarrow$ 174 nm</li>
+            <!-- prettier-ignore -->
+            <li>
+              Scintillation time structure: 
+              \begin{align*} 
+              I(t) & = I_f e^{-t/\tau_f} + I_s e^{-t/\tau_s} & \mbox{LAr} \\
+              I(t) & = I_f e^{-t/\tau_f} + I_s e^{-t/\tau_s} - I_d e^{-t/\tau_d} & \mbox{XeDLAr} \\
+              \end{align*}
+              with $\tau_f = 6\mathrm{ns}$ for both, 
+              $\tau_s = 1300\mathrm{ns} \rightarrow \sim 450\mathrm{ns}$ for XeDLAr, and
+              $\tau_d \sim 200\mathrm{ns}$ (XeDLAr only)
+            </li>
+            <li>
+              Absorption length in the scintillator increases from 66 cm to 150
+              cm (was previously set to 20 m for undoped LAr)
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h4>Xe Doping Implementation in <code>cenns10geant4</code></h4>
+          <ul>
+            <li>
+              A new GDML file specifies the values of scintillation wavelength,
+              time constants, and absorption length for XeDLAr
+            </li>
+            <li>
+              <code>CENNSScintillation</code> has been modified to accommodate
+              the more complicated scintillation time structure
+            </li>
+            <li>
+              Caveats:
+              <ul>
+                <li>
+                  There is no correllation between scintillation time and
+                  wavelength (probably incorrect)
+                </li>
+                <li>Finite rise time not supported</li>
+                <li>
+                  I have guessed a value of $I_d/I_s = 0.4$, will need to be
+                  tuned
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>Comparison Plots</h2>
+          </section>
+          <section><img src="./plots/comp/Co57pe.png" alt="" /></section>
+          <section><img src="./plots/comp/Co57energy.png" alt="" /></section>
+          <section><img src="./plots/comp/Co57f90.png" alt="" /></section>
+          <section><img src="./plots/comp/Co57top_frac.png" alt="" /></section>
+          <section><img src="./plots/comp/Kr83pe.png" alt="" /></section>
+          <section><img src="./plots/comp/Kr83energy.png" alt="" /></section>
+          <section><img src="./plots/comp/Kr83f90.png" alt="" /></section>
+          <section><img src="./plots/comp/Kr83top_frac.png" alt="" /></section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Energy vs F90 Plots</h2>
+          </section>
+          <section><img src="./plots/Co57oldAbs-EvsF90.png" alt="" /></section>
+          <section><img src="./plots/Co57-EvsF90.png" alt="" /></section>
+          <section><img src="./plots/XeCo57-EvsF90.png" alt="" /></section>
+          <section><img src="./plots/Kr83oldAbs-EvsF90.png" alt="" /></section>
+          <section><img src="./plots/Kr83-EvsF90.png" alt="" /></section>
+          <section><img src="./plots/XeKr83-EvsF90.png" alt="" /></section>
+        </section>
+
+        <section>
+          <h4>TO-DO</h4>
+          <ul>
+            <li>
+              Try adjusting other sim parameters to accomodate reduced light
+              yield from shorter absorption length
+            </li>
+            <li>Look at a smaller F parameter (e.g. F40)</li>
+            <li>
+              Consider correlation between scintillation time and wavelength
+            </li>
+            <li>Look for literature results to compare with</li>
+          </ul>
+        </section>
+
+        <!-- Solo plots {{{ -->
+        <section>
+          <section>
+            <h2>Solo Plots (for completeness)</h2>
+          </section>
+          <section><img src="./plots/Co57-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/Co57-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Co57-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Co57-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section><img src="./plots/Co57-fTrueF90.png" alt="" /></section>
+          <section><img src="./plots/Co57oldAbs-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/Co57oldAbs-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Co57oldAbs-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Co57oldAbs-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Co57oldAbs-fTrueF90.png" alt="" />
+          </section>
+          <section><img src="./plots/Kr83-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/Kr83-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Kr83-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Kr83-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section><img src="./plots/Kr83-fTrueF90.png" alt="" /></section>
+          <section><img src="./plots/Kr83oldAbs-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/Kr83oldAbs-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Kr83oldAbs-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Kr83oldAbs-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/Kr83oldAbs-fTrueF90.png" alt="" />
+          </section>
+          <section><img src="./plots/XeCo57-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/XeCo57-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/XeCo57-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/XeCo57-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section><img src="./plots/XeCo57-fTrueF90.png" alt="" /></section>
+          <section><img src="./plots/XeKr83-EvsF90.png" alt="" /></section>
+          <section>
+            <img src="./plots/XeKr83-fDetPhotonsRatioTop.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/XeKr83-fDetPhotonsTot.png" alt="" />
+          </section>
+          <section>
+            <img src="./plots/XeKr83-fEventEnergyLAr.png" alt="" />
+          </section>
+          <section><img src="./plots/XeKr83-fTrueF90.png" alt="" /></section>
+        </section>
+        <!-- }}} -->
+      </div>
+    </div>
+
+    <!--Reveal scripts {{{-->
+    <script src="../node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="../node_modules/reveal.js/plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        history: true,
+        transition: "linear",
+
+        mathjax2: {
+          config: "TeX-AMS_HTML-full",
+          TeX: {
+            Macros: {
+              R: "\\mathbb{R}",
+              set: ["\\left\\{#1 \\; ; \\; #2\\right\\}", 2],
+            },
+          },
+        },
+
+        // There are three typesetters available
+        // RevealMath.MathJax2 (default)
+        // RevealMath.MathJax3
+        // RevealMath.KaTeX
+        //
+        // More info at https://revealjs.com/math/
+        plugins: [RevealMath.MathJax2],
+      });
+    </script>
+    <!--Reveal scripts }}}-->
+  </body>
+</html>
